@@ -1,6 +1,7 @@
 # Algorithm-Analysis-Project
 
 Bazı arama ve sıralama algoritmalarını çalıştıran python kodu.
+
 -Uygulamada adet seçilerek istenen sayıda rastgele sayı üretilebilmektedir.
 -İstenen sayının minimum maksimum aralığı seçilebilmektedir.
 -Menüden arama veya sıralama algoritmasını seçebilirsiniz.
