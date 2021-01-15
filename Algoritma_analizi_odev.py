@@ -54,36 +54,36 @@ def quickSort(arr, low, high):
 
 
 def insertion_sort(bucket):
-	for i in range(1, len(bucket)):
-		number = bucket[i]
-		j = i - 1
-		while (j >= 0 and number < bucket[j]):
-			bucket[j + 1] = bucket[j]
-			j = j - 1
-		bucket[j + 1] = number
+    for i in range(1, len(bucket)):
+        number = bucket[i]
+        j = i - 1
+        while (j >= 0 and number < bucket[j]):
+            bucket[j + 1] = bucket[j]
+            j = j - 1
+        bucket[j + 1] = number
 
 def bucket_sort(array):
-	max_number = max(array)
-	size = max_number / len(array)
+    max_number = max(array)
+    size = max_number / len(array)
 
-	bucket_list = []
-	for x in range(len(array)):
-		bucket_list.append([])
+    bucket_list = []
+    for x in range(len(array)):
+        bucket_list.append([])
 
-	for i in range(len(array)):
-		j = int(array[i] / size)
-		if j != len(array):
-			bucket_list[j].append(array[i])
-		else:
-			bucket_list[len(array) - 1].append(array[i])
+    for i in range(len(array)):
+        j = int(array[i] / size)
+        if j != len(array):
+            bucket_list[j].append(array[i])
+        else:
+            bucket_list[len(array) - 1].append(array[i])
 
-	for z in range(len(array)):
-		insertion_sort(bucket_list[z])
+    for z in range(len(array)):
+        insertion_sort(bucket_list[z])
 
-	result_list = []
-	for x in range(len(array)):
-		result_list = result_list + bucket_list[x]
-	return result_list
+    result_list = []
+    for x in range(len(array)):
+        result_list = result_list + bucket_list[x]
+    return result_list
 
 def counting_sort(arr, exp1): 
   
@@ -208,7 +208,9 @@ def menu():
     q for quit
     """)
     option = input("Select an option: ")
-    if ((int(option) < 3 and int(option) > 0) or option == "q"):
+    if(option == "q"):
+        return option
+    elif(option == "1" or option == "2" or option == "3"):
         if option == "1":
             print("""Searching algorithms
             1. Linear
@@ -220,7 +222,7 @@ def menu():
                 print("Linear")
                 number = int(input("Please enter a number for search: "))
                 start = timer()
-                linearsearch(arr,len(arr),number)
+                linearsearch(arr,len(arr),number,0)
                 end = timer()
                 returnvalue,proc = linearsearch(arr,len(arr),number,0)
                 print("Linear search searching time : ", str(end-start))
@@ -237,7 +239,7 @@ def menu():
                 start = timer()
                 binarySearch(arr, 0, len(arr)-1, number,0)
                 end = timer()
-                returnvalue = binarySearch(arr, 0, len(arr)-1, number)
+                returnvalue = binarySearch(arr, 0, len(arr)-1, number,0)
                 print("Binary search searching time : ", str(end-start))
                 if returnvalue == -1:
                     print(number," cannot be found on array.")
@@ -424,6 +426,8 @@ def menu():
                             print("Radix sort time: ", str(end-start))
         elif option == "q":
             return option
+    else:
+        print("Please enter a valid input.")
 
 while True:
     option = menu()
