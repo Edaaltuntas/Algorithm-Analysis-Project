@@ -156,29 +156,33 @@ def mergeSort(arr):
             k += 1
 
 
-def linearsearch(arr, n, x): 
-  
-    for i in range(0, n): 
+def linearsearch(arr, n, x,process): 
+
+    for i in range(0, n):
+        process += 1
         if (arr[i] == x): 
-            return i 
-    return -1
+            return i,process
+    return -1,process
   
 
 
-def binarySearch (arr, l, r, x): 
+def binarySearch (arr, l, r, x,process):
   
     if r >= l: 
   
         mid = l + (r - l) // 2
   
-        if arr[mid] == x: 
-            return mid 
+        if arr[mid] == x:
+            process+=1
+            return mid,process
            
         elif arr[mid] > x: 
-            return binarySearch(arr, l, mid-1, x) 
+            process+=1
+            return binarySearch(arr, l, mid-1, x,process) 
    
         else: 
-            return binarySearch(arr, mid + 1, r, x) 
+            process+=1
+            return binarySearch(arr, mid + 1, r, x,process) 
   
     else:  
         return -1
@@ -218,7 +222,7 @@ def menu():
                 start = timer()
                 linearsearch(arr,len(arr),number)
                 end = timer()
-                returnvalue = linearsearch(arr,len(arr),number)
+                returnvalue,proc = linearsearch(arr,len(arr),number,0)
                 print("Linear search searching time : ", str(end-start))
                 if returnvalue == -1:
                     print(number," cannot be found on array.")
@@ -226,11 +230,12 @@ def menu():
                 else:
                     print(number," found on array.")
                     print("Index of the number: ", returnvalue)
+                    print("Process step counter: ", proc)
             if option == "2":
                 print("Binary")
                 number = int(input("Please enter a number for search: "))
                 start = timer()
-                binarySearch(arr, 0, len(arr)-1, number)
+                binarySearch(arr, 0, len(arr)-1, number,0)
                 end = timer()
                 returnvalue = binarySearch(arr, 0, len(arr)-1, number)
                 print("Binary search searching time : ", str(end-start))
@@ -240,13 +245,14 @@ def menu():
                 else:
                     print(number," found on array.")
                     print("Index of the number: ", returnvalue)
+                    print("Process step counter: ", proc)
             if option == "3":
                 print("All")
                 number = int(input("Please enter a number for search: "))
                 start = timer()
-                linearsearch(arr,len(arr),number)
+                linearsearch(arr,len(arr),number,0)
                 end = timer()
-                returnvalue = linearsearch(arr,len(arr),number)
+                returnvalue,proc = linearsearch(arr,len(arr),number,0)
                 print("Linear search searching time : ", str(end-start))
                 if returnvalue == -1:
                     print(number," cannot be found on array.")
@@ -254,10 +260,11 @@ def menu():
                 else:
                     print(number," found on array.")
                     print("Index of the number: ", returnvalue)
+                    print("Process step counter: ", proc)
                 start = timer()
-                binarySearch(arr, 0, len(arr)-1, number)
+                binarySearch(arr, 0, len(arr)-1, number,0)
                 end = timer()
-                returnvalue = binarySearch(arr, 0, len(arr)-1, number)
+                returnvalue,proc = binarySearch(arr, 0, len(arr)-1, number,0)
                 print("Binary search searching time : ", str(end-start))
                 if returnvalue == -1:
                     print(number," cannot be found on array.")
@@ -265,6 +272,7 @@ def menu():
                 else:
                     print(number," found on array.")
                     print("Index of the number: ", returnvalue)
+                    print("Process step counter: ", proc)
             elif option == "q":
                 return option
         if option == "2":
